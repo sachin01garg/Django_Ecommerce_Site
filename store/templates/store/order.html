@@ -1,0 +1,44 @@
+   {% extends 'store/main.html' %}
+   {% load static %}
+
+
+{% block title %}
+   Order Page
+{% endblock title %}
+   
+{% block content %}
+   
+
+<section class="orders">
+      
+      {% if order %}
+         
+      
+      <h1 class="heading">placed orders</h1>
+     
+        <div class="box-container">
+            <div class="box">
+                <p>placed on : <span>{{order.order_date}}</span></p>
+                <p>name : <span>{{address.name}}</span></p>
+                <p>email : <span>{{address.email}}</span></p>
+                <p>mob-number : <span>{{address.mobile_no}}</span></p>
+                <p>address : <span>{{shipped_address}}</span></p>
+                <p>payment method : <span>{{order.payment_mode}}</span></p>
+                
+                <p>your orders : <span>
+                {% for order in orders %}
+                {{order.product_id.name}}($ {{order.product_id.price}}  x {{order.quantity}})
+                {% endfor %}
+               </span></p>
+               <p>total price : <span>${{total_price}}</span></p>
+               <p> payment status : <span>{{order.order_status}} </span> </p>
+            </div>
+            
+         </div>
+         {% else %}
+            <div class="cart-total">
+               <p>no orders placed yet!</p>
+            </div>
+      {% endif %}
+      </section>
+{% endblock content %}

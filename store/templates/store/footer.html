@@ -1,0 +1,47 @@
+<!-- footer start -->
+<footer class="footer">
+
+    <section class="grid">
+ 
+       <div class="box">
+          <h3>quick links</h3>
+          <a href="{% url 'store' %}"> <i class="fas fa-angle-right"></i> home</a>
+          <a href="{% url 'about' %}"> <i class="fas fa-angle-right"></i> about</a>
+          <a href="{% url 'shop' %}"> <i class="fas fa-angle-right"></i> shop</a>
+          <a href="{% url 'contact' %}"> <i class="fas fa-angle-right"></i> contact</a>
+       </div>
+ 
+       <div class="box">
+          <h3>extra links</h3>
+          
+          {% if not request.user.is_authenticated  %}
+            <a href="{% url 'login' %}"> <i class="fas fa-angle-right"></i> login</a>
+            <a href="{% url 'registration' %}"> <i class="fas fa-angle-right"></i> register</a>
+          {% endif %}
+          <a href="{% url 'cartlist' %}"> <i class="fas fa-angle-right"></i> cart</a>
+          <a href="{% url 'order_detail' %}"> <i class="fas fa-angle-right"></i> orders</a>
+       </div>
+ 
+       <div class="box">
+          <h3>contact us</h3>
+          <a href="tel:1234567890"><i class="fas fa-phone"></i> +123 456 7899</a>
+          <a href="tel:11122233333"><i class="fas fa-phone"></i> +111 222 3333</a>
+          <a href="mailto:sachin@gmail.com"><i class="fas fa-envelope"></i> sachin@gmail.com</a>
+          <a href="https://www.google.com/myplace"><i class="fas fa-map-marker-alt"></i> Datia(MP), india - 475661 </a>
+       </div>
+ 
+       
+       <div class="box">
+          <h3>follow us</h3>
+          <a href="#"><i class="fab fa-facebook-f"></i>facebook</a>
+          <a href="#"><i class="fab fa-twitter"></i>twitter</a>
+          <a href="#"><i class="fab fa-instagram"></i>instagram</a>
+          <a href="#"><i class="fab fa-linkedin"></i>linkedin</a>
+       </div>
+ 
+    </section>>
+    <!-- <div class="credit">&copy; copyright @ <?= date('Y'); ?> by <span>mr. web designer</span> | all rights reserved!</div> -->
+ </footer>>   
+ <!-- footrt end -->
+ 
+ 

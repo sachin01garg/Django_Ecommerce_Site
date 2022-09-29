@@ -1,0 +1,54 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+
+
+{% block title %}
+    Shopping Cart
+{% endblock title %}
+    
+
+{% block content %}
+    
+
+<section class="products shopping-cart">
+
+        <h3 class="heading">shopping cart</h3>
+     
+        <div class="box-container">
+            
+            {% for product in products %}
+                
+            
+            <form action="" method="POST" class="box">{% csrf_token %}
+                <input type="hidden" name="product_id" value="{{product.product_id.id}}">
+                <a href="{% url 'quickview' product.product_id.id %}" class="fas fa-eye"></a>
+                <img src="{{product.product_id.image_01.url}}" alt="">
+                <div class="name">{{product.product_id.name}}</div>
+                <div class="flex">
+                    <div class="price">${{product.product_id.price}}/-</div>
+                    <input type="number" name="quantity" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="{{product.quantity}}">
+                   <button type="submit" class="fas fa-edit" name="update_quantity" formaction="{% url 'update_quantity' %}"></button>
+                </div>
+                <div class="sub-total"> sub total : <span>${{product.sub_total}}/-</span> </div>
+                <input type="submit" value="delete item" formaction="{% url 'delete_from_cart' %}" onclick="return confirm('delete this from cart?');" class="delete-btn" name="delete">
+            </form>
+                {% endfor %}
+        </div>
+        
+        {% if grand_total != 0 %}
+        <div class="cart-total">
+            <form action="" method="POST">{% csrf_token %}
+              <p>grand total : <span>${{grand_total}}/-</span></p>
+              <a href="{% url 'shop' %}" class="option-btn">continue shopping</a>
+               <input type="submit" value="delete all item" class="delete-btn" name="all_delete" formaction="{% url 'delete_from_cart' %}" onclick="return confirm('delete all from cart?');">
+               <a href="{% url 'checkout' %}" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>">proceed to checkout</a>
+            </form>
+        </div>
+         {% else %}
+             <div class="cart-total">
+                <p>your cart is empty</p>   
+             </div>   
+         {% endif %}
+        </section> 
+        {% endblock content %}

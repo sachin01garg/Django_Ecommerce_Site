@@ -1,0 +1,47 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+
+{% block title %}
+   Update Profile
+{% endblock title %}
+   
+{% block content %}
+<!-- <header class="header">
+   <section class="flex">
+      <a href="#" class="logo">Admin<span>Panel</span></a>
+      <nav class="navbar">
+         <a href="#">home</a>
+         <a href="#">products</a>
+         <a href="#">orders</a>
+         <a href="#">admins</a>
+         <a href="#">users</a>
+         <a href="#">messages</a>
+      </nav>
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+      </div>
+      <div class="profile">
+         <p><?= $fetch_profile['name']; ?></p>
+         <a href="#" class="btn">update profile</a>
+         <div class="flex-btn">
+            <a href="#" class="option-btn">register</a>
+            <a href="#" class="option-btn">login</a>
+         </div>
+         <a href="#" class="delete-btn" onclick="return confirm('logout from the website?');">logout</a> 
+      </div>
+   </section>
+</header>   -->
+<section class="form-container">  
+   <form action="" method="POST">{% csrf_token %}
+      <h3>update profile</h3>
+      <input type="hidden" name="prev_pass" value="<?= $fetch_profile['password']; ?>">
+      <input type="text" name="username" value="{{request.user}}"required placeholder="enter your username" maxlength="20"  class="box">
+      <input type="password" name="old_password" placeholder="enter old password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="password" name="new_password" placeholder="enter new password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="password" name="confirm_pass" placeholder="confirm new password" maxlength="20"  class="box" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="submit" value="update now" class="btn" name="submit">
+   </form>
+</section> 
+{% endblock content %}

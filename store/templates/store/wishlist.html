@@ -1,0 +1,50 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block title %}
+    Wish List 
+{% endblock title %}
+    
+
+{% block content %}
+    
+
+<section class="products">
+
+        <h3 class="heading">your wishlist</h3>
+     
+        <div class="box-container">
+            
+            {% for product in products %}
+                
+            
+            <form action="" method="POST" class="box">{% csrf_token %}
+                <input type="hidden" name="product_id" value="{{product.product_id.id}}">
+                
+                <a href="{% url 'quickview' product.product_id.id %}" class="fas fa-eye"></a>
+                <img src="{{product.product_id.image_01.url}}" alt="">
+                <div class="name">{{product.product_id.name}}</div>
+                <div class="flex">
+                    <div class="price">${{product.product_id.price}}/-</div>
+                    <input type="number" name="quantity" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
+                </div>
+                <input type="submit" value="add to cart" class="btn" name="add_to_cart" formaction="{% url 'addcart' %}">
+                <input type="submit" formaction="{% url 'delete_from_wishlist' %}" value="delete item" onclick="return confirm('delete this from wishlist?');" class="delete-btn" name="delete">
+            </form>
+            {% endfor %}
+             <!-- <div class="wishlist-total">
+                <p>grand total : <span>$100</span></p>
+                <a href="shop.html" class="option-btn">continue shopping</a>
+                <a href="#" class="delete-btn" onclick="return confirm('delete all from wishlist?');">delete all item</a>
+             </div> -->
+            
+            {% if item_count == 0 %}
+              <p class="empty">your wishlist is empty</p>
+            {% endif %}
+                
+        </div>    
+    </section>
+    
+
+
+{% endblock content %}

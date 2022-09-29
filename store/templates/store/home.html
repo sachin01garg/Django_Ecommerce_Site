@@ -1,0 +1,94 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block title %}
+   Home Page
+{% endblock title %}
+   
+{% block content %}
+   
+
+<div class="home-bg">
+   <section class="home">
+      <div class="swiper home-slider">
+         <div class="swiper-wrapper">
+            <div class="swiper-slide slide">
+               <div class="image">
+                  <img src="{% static 'images/home-img-1.png' %}" alt="">
+                  </div>
+                  <div class="content">
+                     <span>upto 50% off</span>
+                     <h3>latest smartphones</h3>
+                     <a href="{% url 'shop' %}" class="btn">shop now</a>
+                  </div>
+               </div>
+               <div class="swiper-slide slide">
+                  <div class="image">
+                     <img src="{% static 'images/home-img-2.png' %}" alt="">
+                  </div>
+                  <div class="content">
+                  <span>upto 50% off</span>
+                  <h3>latest watches</h3>
+                  <a href="{% url 'shop' %}" class="btn">shop now</a>
+               </div>
+            </div>
+            <div class="swiper-slide slide">
+               <div class="image">
+                  <img src="{% static 'images/home-img-3.png' %}" alt="">
+               </div>
+               <div class="content">
+                  <span>upto 50% off</span>
+                  <h3>latest headsets</h3>
+                  <a href="{% url 'shop' %}" class="btn">shop now</a>
+               </div>
+            </div>
+         </div>
+         <div class="swiper-pagination"></div>
+      </div>
+   </section>
+</div>
+
+<section class="category">
+   <h1 class="heading">shop by category</h1>
+   <div class="swiper category-slider">
+      <div class="swiper-wrapper">
+         
+         {% for category in categories  %}
+            
+         
+         <a href="{% url 'category' category.id %}" class="swiper-slide slide">
+            <img src="{{category.image.url}}" alt="">
+            <h3>{{category.category}}</h3>
+         </a>
+         {% endfor %}
+         
+      </div>
+      <div class="swiper-pagination"></div>
+   </div>
+</section>
+
+<section class="home-products">
+   <h1 class="heading">latest products</h1>
+   <div class="swiper products-slider">
+      <div class="swiper-wrapper">
+         {% for product in products  %}
+         <form action="" method="POST" class="swiper-slide slide">{% csrf_token %}
+            <input type="hidden" name="product_id" value="{{product.id}}">
+            <button class="fas fa-heart" type="submit" formaction="{% url 'addwishlist' %}" name="add_to_wishlist"></button>
+            
+            <a href="{% url 'quickview' product.id %}" class="fas fa-eye"></a>
+            <img src="{{product.image_01.url}}" alt="">
+            <div class="name">{{ product.name }}</div>
+            <div class="flex">
+               <div class="price"><span>${{product.price}}</span><span>/-</span></div>
+               <input type="number" name="quantity" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
+            </div>
+            <input type="submit" value="add to cart" class="btn" name="add_to_cart" formaction="{% url 'addcart' %}">
+         </form>
+         {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+   </div>
+</section>
+{% endblock content %}
+
