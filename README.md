@@ -19,7 +19,7 @@
 * Create and Activate a Virtual Environment.
 * Install the project dependencies:
     * `pip install -r requirements.txt`
-* python manage.py migrate.
+* `python manage.py migrate`
 * create admin account
 
     * `python manage.py createsuperuser`
