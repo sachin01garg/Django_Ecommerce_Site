@@ -31,7 +31,7 @@
                   <div class="price"><span>$</span>{{product.price}}<span>/-</span></div>
                   <input type="number" name="quantity" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
               </div>
-              <div class="details">it is high tech watch</div>
+              <div class="details">{{product.details}}</div>
               <div class="flex-btn">
                  <input type="submit" value="add to cart" class="btn" name="add_to_cart" formaction="{% url 'addcart' %}">
                  <input class="option-btn" type="submit" name="add_to_wishlist" value="add to wishlist" formaction="{% url 'addwishlist' %}">
